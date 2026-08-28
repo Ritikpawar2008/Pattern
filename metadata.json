@@ -1,0 +1,6 @@
+{
+  "name": "PATTERN — Visual Intelligence Platform",
+  "description": "An interactive knowledge platform dedicated to understanding pattern recognition across human behavior, business, technology, nature, history, society, and markets with multimodal AI vision scanning.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
