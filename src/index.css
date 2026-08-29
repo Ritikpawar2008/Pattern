@@ -2,79 +2,111 @@
 
 @layer base {
   :root {
-    --bg-primary: #050505;
-    --bg-secondary: #0B0B0B;
-    --surface: #111111;
-    --surface-hover: #171717;
-    --text-primary: #F1EBE6;
-    --text-secondary: #8A8582;
-    --accent: #F26522;
-    --accent-glow: rgba(242, 101, 34, 0.15);
-    --border-subtle: rgba(255, 255, 255, 0.08);
-    --border-hover: rgba(255, 255, 255, 0.16);
+    --bg-primary: #090908;
+    --bg-secondary: #121210;
+    --bg-elevated: #181815;
+    --surface: #1C1C18;
+    --surface-hover: #242420;
+    --text-primary: #F7F4EE;
+    --text-secondary: #A39D93;
+    --text-muted: #6E685F;
+    --accent: #E4572E;
+    --accent-hover: #F26522;
+    --accent-warm: #D4A373;
+    --accent-glow: rgba(228, 87, 46, 0.15);
+    --border-subtle: rgba(247, 244, 238, 0.08);
+    --border-medium: rgba(247, 244, 238, 0.14);
+    --border-hover: rgba(247, 244, 238, 0.22);
   }
 
   body {
-    background-color: #050505;
-    color: #F1EBE6;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #090908;
+    color: #F7F4EE;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+
+  h1, h2, h3, .font-serif, .font-editorial {
+    font-family: 'Times New Roman', Times, 'Editorial New', Georgia, 'Playfair Display', serif;
+    letter-spacing: -0.015em;
   }
 }
 
-.font-display {
-  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+/* Typography Helpers */
+.font-sans, .font-body {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.font-serif, .font-display, .font-heading {
+  font-family: 'Times New Roman', Times, 'Editorial New', Georgia, serif;
 }
 
 .font-mono {
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* Fine grid background pattern */
-.bg-grid-pattern {
-  background-size: 40px 40px;
+/* Subtle human-crafted texture and grids */
+.bg-editorial-grid {
+  background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(247, 244, 238, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(247, 244, 238, 0.02) 1px, transparent 1px);
 }
 
-.bg-radial-glow {
-  background: radial-gradient(circle at 50% 30%, rgba(242, 101, 34, 0.08) 0%, rgba(5, 5, 5, 0) 70%);
+.bg-paper-glow {
+  background: radial-gradient(circle at 50% 15%, rgba(228, 87, 46, 0.06) 0%, rgba(9, 9, 8, 0) 70%);
 }
 
-.bg-radial-subtle {
-  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0%, rgba(5, 5, 5, 0) 70%);
+.bg-editorial-subtle {
+  background: radial-gradient(circle at 50% 50%, rgba(212, 163, 115, 0.04) 0%, rgba(9, 9, 8, 0) 75%);
 }
 
-/* Custom scrollbar */
+/* Refined Editorial Card Styles */
+.editorial-card {
+  background-color: #121210;
+  border: 1px solid rgba(247, 244, 238, 0.08);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  border-color: rgba(247, 244, 238, 0.18);
+  background-color: #161613;
+}
+
+/* Custom refined scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #050505;
+  background: #090908;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 9999px;
+  background: #242420;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+  background: #383832;
 }
 
-/* Subtle glow effects */
-.glow-accent-sm {
-  box-shadow: 0 0 20px rgba(242, 101, 34, 0.2);
+/* Editorial quote styling */
+.editorial-quote {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-style: italic;
+  position: relative;
 }
 
-.glow-accent-md {
-  box-shadow: 0 0 35px rgba(242, 101, 34, 0.28);
+.editorial-quote::before {
+  content: '“';
+  font-size: 3.5rem;
+  line-height: 1;
+  position: absolute;
+  left: -1.5rem;
+  top: -1rem;
+  color: rgba(228, 87, 46, 0.3);
 }
-
-.glow-subtle {
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.04);
-}
-

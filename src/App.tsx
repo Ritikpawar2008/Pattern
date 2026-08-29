@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { GlobalSearchModal } from './components/GlobalSearchModal';
+import { AuthModal } from './components/auth/AuthModal';
 import { Home } from './pages/Home';
 import { Explore } from './pages/Explore';
 import { PatternDetail } from './pages/PatternDetail';
@@ -12,8 +13,10 @@ import { ScanPattern } from './pages/ScanPattern';
 import { CaseStudiesPage } from './pages/CaseStudiesPage';
 import { MyProgress } from './pages/MyProgress';
 import { AboutPage } from './pages/AboutPage';
+import { AuthPage } from './pages/AuthPage';
 import { PATTERNS } from './data/patterns';
 import { UserProgress } from './types';
+import { authService, AuthUser } from './services/supabaseClient';
 import {
   loadUserProgress,
   saveUserProgress,
@@ -26,12 +29,26 @@ export function App() {
   const [selectedPatternId, setSelectedPatternId] = useState<string | null>(null);
   const [selectedCategoryFilter, setSelectedCategoryFilter] = useState<string>('all');
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
   const [userProgress, setUserProgress] = useState<UserProgress>(loadUserProgress());
 
-  // Save progress changes and check achievements
+  // Check existing Supabase session on startup
+  useEffect(() => {
+    authService.getCurrentUser().then(user => {
+      if (user) {
+        setCurrentUser(user);
+      }
+    });
+  }, []);
+
+  // Save progress changes locally and sync to cloud if authenticated
   useEffect(() => {
     saveUserProgress(userProgress);
-  }, [userProgress]);
+    if (currentUser?.id) {
+      authService.syncProgress(currentUser.id, userProgress);
+    }
+  }, [userProgress, currentUser]);
 
   // Global keyboard shortcut for search (Cmd+K / Ctrl+K)
   useEffect(() => {
@@ -92,7 +109,7 @@ export function App() {
       };
 
       const withAct = recordActivity(updated, {
-        type: isAlready ? 'pattern_discovered' : 'pattern_discovered',
+        type: 'pattern_discovered',
         title: isAlready ? 'Removed bookmark' : 'Saved pattern bookmark',
         detail: `Updated your study list`
       });
@@ -174,20 +191,46 @@ export function App() {
     });
   };
 
+  const handleAuthSuccess = (user: AuthUser) => {
+    setCurrentUser(user);
+    setIsAuthModalOpen(false);
+  };
+
+  const handleSignOut = async () => {
+    await authService.signOut();
+    setCurrentUser(null);
+    if (currentTab === 'auth') {
+      setCurrentTab('home');
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#050505] text-[#F1EBE6] flex flex-col font-body selection:bg-[#F26522] selection:text-white">
+    <div className="min-h-screen bg-[#090908] text-[#F7F4EE] flex flex-col font-sans selection:bg-[#E4572E] selection:text-white">
       {/* Top Floating Glassmorphic Header */}
       <Navbar
         currentTab={currentTab}
         onNavigate={handleNavigate}
         userProgress={userProgress}
         onOpenSearch={() => setIsSearchOpen(true)}
+        currentUser={currentUser}
+        onOpenAuth={() => setIsAuthModalOpen(true)}
+        onSignOut={handleSignOut}
       />
 
       {/* Main Page Routing Container */}
       <main className="flex-1 w-full">
         {currentTab === 'home' && (
           <Home onNavigate={handleNavigate} onSelectPattern={handleSelectPattern} />
+        )}
+
+        {currentTab === 'auth' && (
+          <AuthPage
+            currentUser={currentUser}
+            onAuthSuccess={handleAuthSuccess}
+            onSignOut={handleSignOut}
+            userProgress={userProgress}
+            onNavigate={handleNavigate}
+          />
         )}
 
         {currentTab === 'explore' && (
@@ -280,6 +323,13 @@ export function App() {
           handleNavigate('explore', catId);
           setIsSearchOpen(false);
         }}
+      />
+
+      {/* Auth Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        onAuthSuccess={handleAuthSuccess}
       />
 
       {/* Global Footer */}

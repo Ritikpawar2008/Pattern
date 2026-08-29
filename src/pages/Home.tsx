@@ -5,7 +5,6 @@ import { PatternVisualizer } from '../components/PatternVisualizer';
 import { PatternLogo } from '../components/brand/PatternLogo';
 import { CATEGORIES } from '../data/categories';
 import { PATTERNS } from '../data/patterns';
-import { Pattern, Category } from '../types';
 import {
   ArrowRight,
   Sparkles,
@@ -20,7 +19,9 @@ import {
   ShieldCheck,
   BrainCircuit,
   Eye,
-  Workflow
+  Workflow,
+  BookMarked,
+  CheckCircle2
 } from 'lucide-react';
 
 interface HomeProps {
@@ -35,95 +36,93 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
   const featuredPatterns = PATTERNS.slice(0, 6);
 
   return (
-    <div className="w-full flex flex-col space-y-24">
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-12 pb-16 overflow-hidden">
+    <div className="w-full flex flex-col space-y-24 pb-20">
+      {/* 1. HERO EDITORIAL SECTION */}
+      <section className="relative min-h-[85vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 pt-16 pb-20 overflow-hidden bg-editorial-grid">
         {/* Background interactive canvas */}
         <HeroCanvas />
 
-        {/* Ambient Radial Gradients */}
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#F26522]/10 rounded-full blur-[140px] pointer-events-none" />
+        {/* Ambient Warm Paper & Ochre Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] bg-[#E4572E]/10 rounded-full blur-[160px] pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
           {/* Brand Mark Anchor */}
           <div className="mb-6 group">
             <PatternLogo
               variant="icon"
-              size={64}
+              size={68}
               glow={true}
               animated={true}
             />
           </div>
 
           {/* Top Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-md mb-8 animate-in fade-in slide-in-from-bottom-2 duration-500">
-            <span className="w-2 h-2 rounded-full bg-[#F26522] animate-pulse" />
-            <span className="text-xs font-mono tracking-widest text-[#F1EBE6] uppercase font-semibold">
-              The Universal Human Skill
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#181815] border border-white/10 mb-8 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-[#E4572E] animate-pulse" />
+            <span className="text-xs font-sans tracking-widest text-[#D4A373] uppercase font-bold">
+              Cognitive Systems Journal &amp; Visual Intelligence
             </span>
           </div>
 
-          {/* Master Headline */}
-          <h1 className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#F1EBE6] leading-[1.05] uppercase">
-            See what repeats.
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F1EBE6] via-[#F26522] to-[#ff854d]">
+          {/* Master Manifesto Headline */}
+          <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#F7F4EE] leading-[1.08] font-bold">
+            See what repeats.<br />
+            <span className="italic text-[#E4572E] font-normal">
               Understand why.
-            </span>
-            <br />
+            </span><br />
             Predict what comes next.
           </h1>
 
           {/* Subheadline */}
-          <p className="mt-8 text-base sm:text-lg md:text-xl text-[#8A8582] max-w-2xl font-body leading-relaxed">
-            An interactive digital research laboratory and knowledge graph exploring the recurring
-            structures governing human behavior, technology, business, nature, history, and markets.
+          <p className="mt-8 text-base sm:text-lg md:text-xl text-[#A39D93] max-w-2xl font-sans leading-relaxed">
+            A human-crafted digital laboratory exploring the recurring mental models and structural laws
+            governing technology, markets, nature, organizations, and human behavior.
           </p>
 
           {/* Action CTAs */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => onNavigate('scan')}
-              className="px-8 py-4 rounded-xl bg-[#F26522] hover:bg-[#ff7638] text-white font-semibold text-sm transition-all shadow-[0_0_30px_rgba(242,101,34,0.4)] flex items-center gap-2.5 group"
+              className="px-8 py-4 rounded-xl bg-[#E4572E] hover:bg-[#F26522] text-white font-sans font-bold text-sm transition-all shadow-lg hover:shadow-orange-950/60 flex items-center gap-2.5 group"
             >
               <Eye className="w-4 h-4" />
-              <span>Scan A Pattern (AI Vision)</span>
+              <span>Scan Visuals (Groq Vision AI)</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={() => onNavigate('explore')}
-              className="px-7 py-4 rounded-xl bg-[#141414] hover:bg-[#1C1C1C] border border-white/10 text-[#F1EBE6] font-medium text-sm transition-all flex items-center gap-2.5 group"
+              className="px-7 py-4 rounded-xl bg-[#181815] hover:bg-[#242420] border border-white/10 text-[#F7F4EE] font-sans font-semibold text-sm transition-all flex items-center gap-2.5 group"
             >
-              <Compass className="w-4 h-4 text-[#F26522]" />
-              <span>Explore Pattern Universe</span>
+              <Compass className="w-4 h-4 text-[#D4A373]" />
+              <span>Explore 18 Universal Models</span>
             </button>
 
             <button
               onClick={() => onNavigate('spot')}
-              className="px-7 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[#8A8582] hover:text-[#F1EBE6] font-medium text-sm transition-all flex items-center gap-2.5 group"
+              className="px-7 py-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-[#A39D93] hover:text-[#F7F4EE] font-sans font-semibold text-sm transition-all flex items-center gap-2.5 group"
             >
-              <Target className="w-4 h-4 text-amber-400" />
-              <span>Train in Spot The Pattern</span>
+              <Target className="w-4 h-4 text-[#D4A373]" />
+              <span>Test Pattern Intuition</span>
             </button>
           </div>
 
-          {/* Live Mini Hero Visualizer */}
-          <div className="w-full max-w-3xl mt-16 rounded-2xl bg-[#0B0B0B]/90 border border-white/10 p-4 sm:p-6 backdrop-blur-md shadow-2xl">
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/5">
-              <div className="flex items-center gap-2 text-xs font-mono text-[#8A8582]">
-                <Workflow className="w-4 h-4 text-[#F26522]" />
-                <span className="text-[#F1EBE6] font-semibold">LIVE RECOGNITION SIMULATION:</span>
+          {/* Live Simulation Card */}
+          <div className="w-full max-w-3xl mt-16 rounded-3xl bg-[#121210] border border-[#F7F4EE]/15 p-6 shadow-2xl space-y-4">
+            <div className="flex items-center justify-between pb-4 border-b border-white/5">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#A39D93]">
+                <Workflow className="w-4 h-4 text-[#E4572E]" />
+                <span className="text-[#F7F4EE] font-bold">SYSTEMIC SIMULATION:</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1.5 bg-[#181815] p-1 rounded-xl border border-white/5">
                 {(['cycle', 'compounding', 'network'] as const).map(tab => (
                   <button
                     key={tab}
                     onClick={() => setActiveHeroTab(tab)}
-                    className={`px-2.5 py-1 rounded text-[11px] font-mono capitalize transition-all ${
+                    className={`px-3 py-1 rounded-lg text-xs font-sans capitalize transition-all ${
                       activeHeroTab === tab
-                        ? 'bg-[#F26522] text-white font-bold'
-                        : 'bg-white/5 text-[#8A8582] hover:text-[#F1EBE6]'
+                        ? 'bg-[#E4572E] text-white font-bold'
+                        : 'text-[#A39D93] hover:text-[#F7F4EE]'
                     }`}
                   >
                     {tab}
@@ -137,21 +136,21 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         </div>
       </section>
 
-      {/* 2. THE 5-STEP COGNITIVE PILLARS */}
+      {/* 2. THE 5-STAGE PERCEPTUAL METHOD */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
-            <span className="text-xs font-mono text-[#F26522] uppercase tracking-widest font-semibold">
-              The Cognitive Method
+        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+          <div className="flex items-center justify-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#E4572E]" />
+            <span className="text-xs font-mono text-[#D4A373] uppercase tracking-widest font-semibold">
+              The Cognitive Architecture
             </span>
           </div>
-          <h2 className="font-display font-black text-3xl sm:text-4xl text-[#F1EBE6] tracking-tight">
-            HOW MASTERS READ REALITY
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#F7F4EE] font-bold tracking-tight">
+            How Masters Deconstruct Reality
           </h2>
-          <p className="text-sm text-[#8A8582] mt-3">
+          <p className="text-sm font-sans text-[#A39D93] leading-relaxed">
             Pattern recognition is not intuition or guesswork. It is a systematic 5-stage
-            perceptual architecture.
+            perceptual practice practiced across science, engineering, and philosophy.
           </p>
         </div>
 
@@ -162,56 +161,56 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
               name: 'OBSERVE',
               icon: Eye,
               title: 'Isolate The Signal',
-              desc: 'Filter noise to spot recurring behaviors, anomalies, and structural invariants.'
+              desc: 'Filter environmental noise to identify structural invariants and directional momentum.'
             },
             {
               step: '02',
               name: 'DETECT',
               icon: BrainCircuit,
-              title: 'Identify Architecture',
-              desc: 'Match observed dynamics against fundamental systems archetypes (loops, power laws).'
+              title: 'Match Architecture',
+              desc: 'Classify observed forces against fundamental systemic archetypes (S-curves, power laws, loops).'
             },
             {
               step: '03',
               name: 'UNDERSTAND',
               icon: Zap,
-              title: 'Deconstruct Drivers',
-              desc: 'Examine incentives, delays, bottlenecks, and feedback mechanisms driving the system.'
+              title: 'Map Drivers & Delay',
+              desc: 'Examine feedback delays, incentive alignments, capacity limits, and friction points.'
             },
             {
               step: '04',
               name: 'CONNECT',
               icon: Share2,
-              title: 'Cross-Domain Isomorphism',
-              desc: 'Translate insights across biology, finance, software, and everyday human psychology.'
+              title: 'Cross-Domain Insight',
+              desc: 'Translate dynamics across biology, markets, engineering networks, and everyday human psychology.'
             },
             {
               step: '05',
               name: 'PREDICT',
               icon: Target,
-              title: 'Forecast Inflexions',
-              desc: 'Anticipate tipping points, second-order consequences, and optimal intervention levers.'
+              title: 'Project Trajectories',
+              desc: 'Anticipate tipping points, second-order consequences, and optimal leverage intervention points.'
             }
           ].map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-[#0B0B0B] border border-white/5 hover:border-[#F26522]/40 transition-all group flex flex-col justify-between min-h-[220px]"
+                className="editorial-card p-6 rounded-2xl flex flex-col justify-between min-h-[230px] group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-xs text-[#F26522] font-bold">{item.step}</span>
-                    <Icon className="w-4 h-4 text-[#8A8582] group-hover:text-[#F26522] transition-colors" />
+                    <span className="font-mono text-xs text-[#E4572E] font-bold">{item.step}</span>
+                    <Icon className="w-4 h-4 text-[#A39D93] group-hover:text-[#E4572E] transition-colors" />
                   </div>
-                  <h3 className="font-display font-bold text-base text-[#F1EBE6] tracking-tight">
+                  <h3 className="font-serif font-bold text-lg text-[#F7F4EE] tracking-tight">
                     {item.name}
                   </h3>
-                  <div className="text-xs font-mono text-[#F26522] mb-2">{item.title}</div>
-                  <p className="text-xs text-[#8A8582] leading-relaxed">{item.desc}</p>
+                  <div className="text-xs font-sans text-[#D4A373] mb-2 font-semibold">{item.title}</div>
+                  <p className="text-xs font-sans text-[#A39D93] leading-relaxed">{item.desc}</p>
                 </div>
                 <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden mt-4">
-                  <div className="w-0 group-hover:w-full h-full bg-[#F26522] transition-all duration-500" />
+                  <div className="w-0 group-hover:w-full h-full bg-[#E4572E] transition-all duration-500" />
                 </div>
               </div>
             );
@@ -224,45 +223,38 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         <DailyPatternWidget onSelectPattern={onSelectPattern} />
       </section>
 
-      {/* 3.5 DEDICATED FEATURE BANNER: SCAN A PATTERN */}
+      {/* 4. VISION SCANNER HERO BANNER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#0C0C0C] via-[#0E0E0E] to-[#140E0A] border border-[#F26522]/30 shadow-2xl overflow-hidden">
-          {/* Subtle glowing reticles */}
-          <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-[#F26522]" />
-          <div className="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-[#F26522]" />
-          <div className="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-[#F26522]" />
-          <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-[#F26522]" />
-          <div className="absolute right-0 top-0 w-96 h-96 bg-[#F26522]/10 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="editorial-card rounded-3xl p-8 sm:p-12 border border-[#E4572E]/30 bg-[#121210] relative overflow-hidden shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
             <div className="lg:col-span-7 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F26522]/20 border border-[#F26522]/40 text-[#F26522] text-xs font-mono font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E4572E]/15 border border-[#E4572E]/30 text-[#E4572E] text-xs font-mono font-bold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>Multimodal Vision Intelligence</span>
+                <span>Powered by Groq Vision &amp; Reasoning</span>
               </div>
 
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-[#F1EBE6] tracking-tight leading-tight">
-                WHAT DO YOU SEE? <br />
-                <span className="text-[#F26522]">UPLOAD AN IMAGE. LET PATTERN LOOK DEEPER.</span>
+              <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F7F4EE] tracking-tight leading-tight">
+                Upload Any Image.<br />
+                <span className="italic text-[#E4572E]">Let PATTERN Deconstruct the Hidden System.</span>
               </h2>
 
-              <p className="text-sm font-body text-[#8A8582] max-w-xl leading-relaxed">
-                Feed real-world charts, physical architectures, network diagrams, or organic photographs into the PATTERN vision engine. Deconstruct visual topologies into direct observations, underlying systemic mechanisms, and probabilistic forward trajectories.
+              <p className="text-sm font-sans text-[#A39D93] max-w-xl leading-relaxed">
+                Feed real-world charts, physical architectures, network diagrams, or organizational scenarios into our Groq Vision intelligence engine. Extract observable evidence, theoretical models, and second-order trajectory forecasts in seconds.
               </p>
 
               <div className="pt-2 flex flex-wrap items-center gap-4">
                 <button
                   onClick={() => onNavigate('scan')}
-                  className="px-7 py-3.5 rounded-xl bg-[#F26522] hover:bg-[#ff7638] text-white font-mono font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(242,101,34,0.4)] flex items-center gap-2 group"
+                  className="px-7 py-3.5 rounded-xl bg-[#E4572E] hover:bg-[#F26522] text-white font-sans font-bold text-xs uppercase tracking-wider transition-all shadow-lg flex items-center gap-2 group"
                 >
                   <Eye className="w-4 h-4" />
-                  <span>Launch Pattern Scanner</span>
+                  <span>Launch Vision AI Scanner</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
 
-                <div className="text-xs font-mono text-[#8A8582] flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span>Supports Camera, Files &amp; Clipboard (⌘V)</span>
+                <div className="text-xs font-sans text-[#A39D93] flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>Multi-image comparison &amp; follow-up questions supported</span>
                 </div>
               </div>
             </div>
@@ -270,20 +262,20 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
             <div className="lg:col-span-5">
               <div
                 onClick={() => onNavigate('scan')}
-                className="cursor-pointer group p-5 rounded-2xl bg-black/70 border border-white/10 hover:border-[#F26522]/50 transition-all space-y-3"
+                className="cursor-pointer group p-6 rounded-2xl bg-[#181815] border border-white/10 hover:border-[#E4572E]/50 transition-all space-y-3"
               >
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#8A8582]">
-                  <span>Visual Pipeline:</span>
-                  <span className="text-[#F26522] font-semibold">OBSERVE ➔ DETECT ➔ PREDICT</span>
+                <div className="flex items-center justify-between text-[11px] font-mono text-[#A39D93]">
+                  <span>Vision Analysis Chain:</span>
+                  <span className="text-[#D4A373] font-semibold">OBSERVE ➔ DECONSTRUCT ➔ FORECAST</span>
                 </div>
-                <div className="aspect-video rounded-xl bg-[#090909] border border-white/5 flex flex-col items-center justify-center p-4 text-center space-y-2 group-hover:border-[#F26522]/30 transition-colors">
-                  <div className="w-10 h-10 rounded-xl bg-[#141414] border border-white/10 flex items-center justify-center text-[#F26522] group-hover:scale-110 transition-transform">
-                    <Eye className="w-5 h-5" />
+                <div className="aspect-video rounded-xl bg-[#0F0F0D] border border-white/5 flex flex-col items-center justify-center p-4 text-center space-y-2 group-hover:border-[#E4572E]/30 transition-colors">
+                  <div className="w-12 h-12 rounded-2xl bg-[#1C1C18] border border-white/10 flex items-center justify-center text-[#E4572E] group-hover:scale-110 transition-transform">
+                    <Eye className="w-6 h-6" />
                   </div>
-                  <span className="text-xs font-display font-bold text-[#F1EBE6]">
+                  <span className="text-sm font-serif font-bold text-[#F7F4EE]">
                     Drop chart, diagram, or photo
                   </span>
-                  <span className="text-[10px] font-mono text-[#8A8582]">
+                  <span className="text-[11px] font-sans text-[#A39D93]">
                     Click to try with instant 1-click test samples
                   </span>
                 </div>
@@ -293,30 +285,30 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         </div>
       </section>
 
-      {/* 4. THE 8 DOMAIN UNIVERSES */}
+      {/* 5. THE OPERATIONAL DOMAINS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
-              <span className="text-xs font-mono text-[#F26522] uppercase tracking-widest font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4572E]" />
+              <span className="text-xs font-mono text-[#D4A373] uppercase tracking-widest font-semibold">
                 Universal Cross-Domain Matrix
               </span>
             </div>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-[#F1EBE6] tracking-tight">
-              THE PATTERN UNIVERSE
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#F7F4EE] font-bold tracking-tight">
+              The Pattern Library
             </h2>
-            <p className="text-sm text-[#8A8582] mt-2 max-w-xl">
+            <p className="text-sm font-sans text-[#A39D93] mt-2 max-w-xl">
               Patterns are not confined to academic silos. Explore how systemic forces repeat across
-              8 primary operational realms.
+              8 fundamental operational realms.
             </p>
           </div>
 
           <button
             onClick={() => onNavigate('explore')}
-            className="text-xs font-mono text-[#F26522] hover:text-white flex items-center gap-1.5 transition-colors group"
+            className="text-xs font-sans font-semibold text-[#E4572E] hover:text-white flex items-center gap-1.5 transition-colors group"
           >
-            <span>View All 22 Patterns</span>
+            <span>View All Patterns</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -329,30 +321,24 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
               <div
                 key={cat.id}
                 onClick={() => onNavigate('explore', cat.id)}
-                className="p-6 rounded-2xl bg-[#0B0B0B] border border-white/10 hover:border-white/25 cursor-pointer transition-all flex flex-col justify-between group min-h-[220px] relative overflow-hidden"
+                className="editorial-card p-6 rounded-2xl cursor-pointer flex flex-col justify-between group min-h-[220px] relative overflow-hidden"
               >
-                {/* Subtle corner accent */}
-                <div
-                  className="absolute top-0 right-0 w-24 h-24 rounded-full blur-2xl opacity-10 group-hover:opacity-30 transition-opacity"
-                  style={{ backgroundColor: cat.accentColor }}
-                />
-
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-xs font-mono text-[#8A8582]">{count} Patterns</span>
-                    <ArrowUpRight className="w-4 h-4 text-[#8A8582] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    <span className="text-xs font-mono text-[#A39D93]">{count} Patterns</span>
+                    <ArrowUpRight className="w-4 h-4 text-[#A39D93] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
                   </div>
-                  <h3 className="font-display font-bold text-xl text-[#F1EBE6] group-hover:text-[#F26522] transition-colors">
+                  <h3 className="font-serif font-bold text-xl text-[#F7F4EE] group-hover:text-[#E4572E] transition-colors">
                     {cat.name}
                   </h3>
-                  <p className="text-xs text-[#8A8582] mt-2 leading-relaxed line-clamp-2">
+                  <p className="text-xs font-sans text-[#A39D93] mt-2 leading-relaxed line-clamp-2">
                     {cat.description}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-[#8A8582]">
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-sans text-[#A39D93]">
                   <span>Explore domain</span>
-                  <span className="text-[#F26522]">→</span>
+                  <span className="text-[#E4572E]">→</span>
                 </div>
               </div>
             );
@@ -360,30 +346,30 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         </div>
       </section>
 
-      {/* 5. FEATURED RECOGNITION ARCHETYPES */}
+      {/* 6. FEATURED ARCHETYPES */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#F26522]" />
-              <span className="text-xs font-mono text-[#F26522] uppercase tracking-widest font-semibold">
-                Fundamental Archetypes
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E4572E]" />
+              <span className="text-xs font-mono text-[#D4A373] uppercase tracking-widest font-semibold">
+                Core Mental Models
               </span>
             </div>
-            <h2 className="font-display font-black text-3xl sm:text-4xl text-[#F1EBE6] tracking-tight">
-              MASTER ARCHITECTURES
+            <h2 className="font-serif text-3xl sm:text-4xl text-[#F7F4EE] font-bold tracking-tight">
+              Featured Architectures
             </h2>
-            <p className="text-sm text-[#8A8582] mt-2 max-w-xl">
-              Study the exact causal mechanics behind viral scale, market panics, habits, and
+            <p className="text-sm font-sans text-[#A39D93] mt-2 max-w-xl">
+              Study the exact causal mechanics behind viral adoption, market panics, habits, and
               network moats.
             </p>
           </div>
 
           <button
             onClick={() => onNavigate('map')}
-            className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-[#F1EBE6] flex items-center gap-2 transition-all"
+            className="px-4 py-2 rounded-xl bg-[#181815] hover:bg-[#242420] border border-white/10 text-xs font-sans font-semibold text-[#F7F4EE] flex items-center gap-2 transition-all"
           >
-            <Share2 className="w-3.5 h-3.5 text-[#F26522]" />
+            <Share2 className="w-3.5 h-3.5 text-[#E4572E]" />
             <span>Open Connected Graph Map</span>
           </button>
         </div>
@@ -393,24 +379,24 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
             <div
               key={p.id}
               onClick={() => onSelectPattern(p.id)}
-              className="p-6 rounded-2xl bg-[#0B0B0B] border border-white/10 hover:border-[#F26522]/50 cursor-pointer transition-all flex flex-col justify-between group shadow-lg"
+              className="editorial-card p-6 rounded-2xl cursor-pointer flex flex-col justify-between group shadow-lg"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] font-mono text-[#F26522] uppercase font-semibold">
+                  <span className="px-2.5 py-1 rounded bg-white/5 border border-white/10 text-[11px] font-mono text-[#E4572E] uppercase font-semibold">
                     {p.category}
                   </span>
-                  <span className="text-xs font-mono text-[#8A8582] group-hover:text-white flex items-center gap-1 transition-colors">
-                    <span>Inspect</span>
+                  <span className="text-xs font-sans text-[#A39D93] group-hover:text-white flex items-center gap-1 transition-colors">
+                    <span>Inspect Model</span>
                     <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                   </span>
                 </div>
 
-                <h3 className="font-display font-bold text-xl text-[#F1EBE6] group-hover:text-[#F26522] transition-colors mt-2">
+                <h3 className="font-serif font-bold text-2xl text-[#F7F4EE] group-hover:text-[#E4572E] transition-colors mt-2">
                   {p.title}
                 </h3>
-                <p className="text-xs font-mono text-[#8A8582] italic mt-1">"{p.tagline}"</p>
-                <p className="text-xs text-[#8A8582] mt-3 line-clamp-3 leading-relaxed">
+                <p className="text-xs font-serif italic text-[#D4A373] mt-1">"{p.tagline}"</p>
+                <p className="text-xs font-sans text-[#A39D93] mt-3 line-clamp-3 leading-relaxed">
                   {p.definition}
                 </p>
               </div>
@@ -421,9 +407,9 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
               </div>
 
               {/* Rule Footer */}
-              <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono">
-                <span className="text-[#8A8582]">Key Rule:</span>
-                <span className="text-[#F1EBE6] truncate max-w-[200px] text-right font-medium">
+              <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-sans">
+                <span className="text-[#A39D93]">Core Axiom:</span>
+                <span className="text-[#F7F4EE] truncate max-w-[200px] text-right font-medium">
                   {p.keyRule}
                 </span>
               </div>
@@ -432,34 +418,32 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         </div>
       </section>
 
-      {/* 6. INTERACTIVE TOOLS TEASER BANNER (ANALYZER & TRAINING) */}
+      {/* 7. SITUATION & TRAINING LAB TEASERS */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Situation Analyzer Teaser */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-[#121212] to-[#0A0A0A] border border-white/10 flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#F26522]/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="editorial-card p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-[#F26522]/20 border border-[#F26522]/30 flex items-center justify-center text-[#F26522] mb-6">
-                <Cpu className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-[#E4572E]/15 border border-[#E4572E]/30 flex items-center justify-center text-[#E4572E] mb-6">
+                <Cpu className="w-6 h-6" />
               </div>
-              <span className="text-xs font-mono text-[#F26522] uppercase tracking-wider font-semibold">
-                Diagnosis Engine
+              <span className="text-xs font-mono text-[#E4572E] uppercase tracking-wider font-semibold">
+                Heuristic &amp; Groq Intelligence
               </span>
-              <h3 className="font-display font-black text-2xl md:text-3xl text-[#F1EBE6] mt-2 tracking-tight">
-                SITUATION ANALYZER
+              <h3 className="font-serif font-bold text-2xl md:text-3xl text-[#F7F4EE] mt-2 tracking-tight">
+                Situation Analyzer
               </h3>
-              <p className="text-sm text-[#8A8582] mt-3 leading-relaxed">
-                Describe a confusing situation in your business, startup, habits, or team. Our
-                heuristic engine detects hidden bottlenecks, feedback loops, and unintended
-                consequences.
+              <p className="text-sm font-sans text-[#A39D93] mt-3 leading-relaxed">
+                Describe a confusing or escalating situation in your startup, personal habits, or team.
+                Our cognitive diagnostic engine detects hidden bottlenecks, feedback loops, and unintended consequences.
               </p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-              <span className="text-xs font-mono text-[#8A8582]">Rule-based heuristic model</span>
+              <span className="text-xs font-sans text-[#A39D93]">AI-driven cognitive diagnosis</span>
               <button
                 onClick={() => onNavigate('analyze')}
-                className="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#F1EBE6] text-xs font-mono font-semibold transition-colors flex items-center gap-2"
+                className="px-5 py-2.5 rounded-xl bg-[#181815] hover:bg-[#242420] text-[#F7F4EE] text-xs font-sans font-semibold transition-colors flex items-center gap-2 border border-white/10"
               >
                 <span>Launch Analyzer</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -468,29 +452,28 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
           </div>
 
           {/* Spot the Pattern Training Teaser */}
-          <div className="p-8 rounded-3xl bg-gradient-to-br from-[#121212] to-[#0A0A0A] border border-white/10 flex flex-col justify-between relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="editorial-card p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden group">
             <div>
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-6">
-                <Target className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-[#D4A373]/15 border border-[#D4A373]/30 flex items-center justify-center text-[#D4A373] mb-6">
+                <Target className="w-6 h-6" />
               </div>
-              <span className="text-xs font-mono text-amber-400 uppercase tracking-wider font-semibold">
-                Brain Training Lab
+              <span className="text-xs font-mono text-[#D4A373] uppercase tracking-wider font-semibold">
+                Perceptual Calibration
               </span>
-              <h3 className="font-display font-black text-2xl md:text-3xl text-[#F1EBE6] mt-2 tracking-tight">
-                SPOT THE PATTERN
+              <h3 className="font-serif font-bold text-2xl md:text-3xl text-[#F7F4EE] mt-2 tracking-tight">
+                Spot the Pattern
               </h3>
-              <p className="text-sm text-[#8A8582] mt-3 leading-relaxed">
-                Test your pattern recognition intuition with real-world scenarios. Solve timed
-                challenges, diagnose hidden systemic traps, and build your cognitive radar profile.
+              <p className="text-sm font-sans text-[#A39D93] mt-3 leading-relaxed">
+                Test your pattern recognition radar against authentic real-world cases. Solve timed
+                challenges, diagnose hidden systemic traps, and build your mastery radar profile.
               </p>
             </div>
 
             <div className="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
-              <span className="text-xs font-mono text-[#8A8582]">10 Timed Challenges</span>
+              <span className="text-xs font-sans text-[#A39D93]">10 Curated Challenges</span>
               <button
                 onClick={() => onNavigate('spot')}
-                className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-black text-xs font-mono font-bold transition-colors flex items-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                className="px-5 py-2.5 rounded-xl bg-[#D4A373] hover:bg-[#e2b588] text-black text-xs font-sans font-bold transition-colors flex items-center gap-2"
               >
                 <span>Start Training</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -500,46 +483,49 @@ export const Home: React.FC<HomeProps> = ({ onNavigate, onSelectPattern }) => {
         </div>
       </section>
 
-      {/* 7. EDITORIAL ESSAY SECTION: WHY PATTERN RECOGNITION MATTERS */}
+      {/* 8. EDITORIAL MANIFESTO ESSAY */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 md:p-12 rounded-3xl bg-[#090909] border border-white/10 relative overflow-hidden">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#F26522]" />
-            <span className="text-xs font-mono text-[#F26522] uppercase tracking-widest font-semibold">
-              The Cognitive Thesis
+        <div className="editorial-card p-8 md:p-12 rounded-3xl border border-[#F7F4EE]/10 bg-[#121210] relative overflow-hidden space-y-6">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-[#E4572E]" />
+            <span className="text-xs font-mono text-[#D4A373] uppercase tracking-widest font-semibold">
+              The Editorial Manifesto
             </span>
           </div>
 
-          <h2 className="font-display font-black text-3xl sm:text-4xl text-[#F1EBE6] tracking-tight">
-            WHY PATTERN RECOGNITION IS THE ULTIMATE SKILL
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F7F4EE] tracking-tight leading-tight">
+            Why Pattern Recognition is the Ultimate Human Advantage
           </h2>
 
-          <div className="mt-6 space-y-4 text-sm md:text-base text-[#8A8582] leading-relaxed font-body">
+          <div className="space-y-4 text-sm md:text-base text-[#A39D93] leading-relaxed font-sans">
             <p>
               In a world flooded with infinite noisy data, raw memorization is worthless. The most
-              effective thinkers—from Warren Buffett and Charlie Munger to biological researchers and
-              breakthrough engineers—do not possess superior memory; they possess superior mental
-              indexing.
+              profound thinkers—from polymaths and Nobel laureates to legendary engineers and investors—do
+              not possess superior memory; they possess superior structural indexing.
             </p>
             <p>
-              They recognize that an viral social audio trend operates on the exact same mathematical
-              epidemiological curve ($R_0$) as a seasonal flu virus. They know that an unmonitored
-              software microservice queue experiences the exact same bottleneck congestion as a
-              traffic jam on the Golden Gate bridge.
+              They understand that a viral social adoption wave adheres to the exact same mathematical
+              epidemiological curve as a biological pathogen. They recognize that an unmonitored
+              distributed software pipeline experiences the identical bottleneck dynamics as vehicular
+              traffic on a suspension bridge.
             </p>
-            <p className="text-[#F1EBE6] font-semibold border-l-2 border-[#F26522] pl-4 italic">
+            <blockquote className="p-6 rounded-2xl bg-[#181815] border-l-4 border-[#E4572E] text-[#F7F4EE] font-serif text-lg italic my-6">
               "When you understand the pattern, the world ceases to be a chaotic sequence of
-              unpredictable shocks. It becomes an orchestrated dance of recurring systemic forces."
+              unpredictable shocks. It reveals itself as an interconnected dance of universal systemic laws."
+            </blockquote>
+            <p>
+              By training your perceptual radar with PATTERN, you develop the instinctive ability to isolate
+              signals, identify architectural constraints, and anticipate second-order trajectories with clarity.
             </p>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
-            <div className="text-xs font-mono text-[#8A8582]">
-              Start training your cognitive pattern recognition today.
+          <div className="pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+            <div className="text-xs font-sans text-[#A39D93]">
+              Begin your study of systemic patterns today.
             </div>
             <button
               onClick={() => onNavigate('explore')}
-              className="px-6 py-3 rounded-xl bg-[#F26522] hover:bg-[#ff7638] text-white font-semibold text-xs font-mono transition-all flex items-center gap-2"
+              className="px-6 py-3 rounded-xl bg-[#E4572E] hover:bg-[#F26522] text-white font-sans font-bold text-xs transition-all flex items-center gap-2"
             >
               <span>Explore All Models</span>
               <ArrowRight className="w-3.5 h-3.5" />
